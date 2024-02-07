@@ -1,9 +1,17 @@
 import SwiftUI
 import RealityKit
 import RealityKitContent
+import SwiftHotReload
+
+extension RemixSwiftUIApp {
+    static let reloader = StandaloneReloader(monitoredSwiftFile: URL(filePath: #filePath).deletingLastPathComponent()
+        .appendingPathComponent("RuntimeOverrides.swift"))
+}
 
 @main
 struct RemixSwiftUIApp: SwiftUI.App {
+    @ObservedObject private var reloader = RemixSwiftUIApp.reloader
+
     @State private var showImmersiveSpace: Bool = false
     @State private var immersiveSpaceIsShown = false
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
