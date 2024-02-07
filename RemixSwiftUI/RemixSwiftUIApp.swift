@@ -32,8 +32,12 @@ struct RemixSwiftUIApp: SwiftUI.App {
             Toggle("Toggle", isOn: $toggleValue).fixedSize().padding().glassBackgroundEffect(),
             PhysicalMetricsContainer { Slider(value: $sliderValue).frame(maxWidth: $0.convert(30, from: .centimeters)).padding() },
             Popup(),
-            Popup(offsetY: { $0 ? $1.convert(-5, from: .centimeters) : 0 }) { Text("Open Toggle").font(.extraLargeTitle) } content: {
+            Popup { Text("Open Toggle").font(.extraLargeTitle) } content: {
                 Toggle("Toggle", isOn: $toggleValue).fixedSize().padding()
+            },
+            BottomAlignedLayout {
+                Text("BottomAlignedLayout1").font(.extraLargeTitle).padding().glassBackgroundEffect()
+                Text("BottomAlignedLayout2").font(.extraLargeTitle).padding().glassBackgroundEffect()
             },
             Text("Text 1").font(.extraLargeTitle).padding().glassBackgroundEffect(),
             Text("Text 2").font(.extraLargeTitle).padding().glassBackgroundEffect(),
