@@ -35,10 +35,6 @@ struct RemixSwiftUIApp: SwiftUI.App {
             Popup { Text("Open Toggle").font(.extraLargeTitle) } content: {
                 Toggle("Toggle", isOn: $toggleValue).fixedSize().padding()
             },
-            BottomAlignedLayout {
-                Text("BottomAlignedLayout1").font(.extraLargeTitle).padding().glassBackgroundEffect()
-                Text("BottomAlignedLayout2").font(.extraLargeTitle).padding().glassBackgroundEffect()
-            },
             Text("Text 1").font(.extraLargeTitle).padding().glassBackgroundEffect(),
             Text("Text 2").font(.extraLargeTitle).padding().glassBackgroundEffect(),
             Text("Text 3").font(.extraLargeTitle).padding().glassBackgroundEffect(),
@@ -54,6 +50,15 @@ struct RemixSwiftUIApp: SwiftUI.App {
 
         ImmersiveSpace(id: "ImmersiveSpace") {
             ImmersiveView(sample1)
+        }
+
+        // ImmersiveSpace but not in RealityView
+        // TODO: place button or any UI to open this immersive space
+        ImmersiveSpace(id: "ImmersiveSpaceWithoutRealityView") {
+            BottomAlignedLayout { // <- with this, the bottom of the content is placed at y=0 (floor). otherwise the middle.y of the content = 0
+                WindowView(sample1) // same as contents in the WindowGroup above
+            }
+            .offset(z: -600)
         }
     }
 

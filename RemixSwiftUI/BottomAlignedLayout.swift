@@ -2,13 +2,16 @@ import SwiftUI
 
 /// for Entities converted from SwiftUI via RealityView attachments
 struct BottomAlignedLayout: Layout {
+    /// for clipped views, use `BottomAlignedLayout { VStack { Spacer(); content } }` or avoidClippingByDoubleHeight.
+    var avoidClippingByDoubleHeight: Bool = false
+
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         // assume vertically stacked in case multiple subviews are passed
         let idealSizes = subviews.map { $0.sizeThatFits(proposal) }
         let idealWidth = idealSizes.map(\.width).max() ?? proposal.width ?? 0
         let idealHeight = idealSizes.map(\.height).reduce(0, +)
         // print("\(#function) proposal = \(proposal), BttomAlignedLayout = \((idealWidth, idealHeight))")
-        return CGSize(width: idealWidth, height: idealHeight)
+        return CGSize(width: idealWidth, height: idealHeight * (avoidClippingByDoubleHeight ? 2 : 1))
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
@@ -28,8 +31,9 @@ struct BottomAlignedLayout: Layout {
             let height = subview.sizeThatFits(proposalForSubview).height
             return (offsetFromBottom + height, offsets + [(offsetFromBottom, proposalForSubview)])
         }
+        let offsetBias = -(consumed / (avoidClippingByDoubleHeight ? 1 : 2))
         zip(offsetsFromBottom, subviews.reversed()).forEach { offsets, subview in
-            subview.place(at: CGPoint(x: bounds.midX, y: bounds.maxY - offsets.0 - consumed / 2), anchor: .bottom, proposal: offsets.1)
+            subview.place(at: CGPoint(x: bounds.midX, y: bounds.maxY - offsets.0 + offsetBias), anchor: .bottom, proposal: offsets.1)
         }
         // print("\(#function) proposal = \(proposal), consumed = \(consumed)")
     }

@@ -43,8 +43,8 @@ struct ImmersiveView: View {
                 .compactMap { (index: Int, entity: Entity?) -> Entity? in
                     guard let entity else { return nil }
                     entity.transform = layout(index, self.attachments.count, entity, radius, scale, dragAngleAccumulated + dragAngle)
-                    // NOTE: make entity bottom-aligned. only works for Model3D
-                    entity.transform.translation.y = entity.visualBounds(relativeTo: nil).extents.y / 2
+                    // NOTE: make entity bottom-aligned. only works for Model3D. use BottomAlignedLayout {} for SwiftUI view
+                    // entity.transform.translation.y = entity.visualBounds(relativeTo: nil).extents.y / 2
                     return entity
                 }
                 .filter { $0.parent == nil }
@@ -56,7 +56,9 @@ struct ImmersiveView: View {
         } attachments: {
             ForEach(attachments) { a in
                 Attachment(id: a.id) {
-                    AnyView(a.body())
+                    BottomAlignedLayout(avoidClippingByDoubleHeight: true) {
+                        AnyView(a.body())
+                    }
 //                        .gesture(DragGesture(minimumDistance: 0)
 //                                 //.targetedToAnyEntity() // this prevents working
 //                            .onChanged { value in

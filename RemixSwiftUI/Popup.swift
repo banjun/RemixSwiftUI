@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct Popup: View {
+    let bottomAligned: Bool = false
     @State private var isExpanded: Bool = false
 
     var toggleText: () -> any View = {
@@ -17,20 +18,28 @@ struct Popup: View {
     }
 
     var body: some View {
-        BottomAlignedLayout {
-            VStack {
-                AnyView(toggleText())
-                if isExpanded {
-                    AnyView(content())
-                }
+        if bottomAligned {
+            BottomAlignedLayout {
+                innerContent()
             }
-            .padding()
-            .glassBackgroundEffect()
-            .hoverEffect()
-            .onTapGesture {
-                withAnimation(.spring) {
-                    isExpanded.toggle()
-                }
+        } else {
+            innerContent()
+        }
+    }
+
+    private func innerContent() -> some View {
+        VStack {
+            AnyView(toggleText())
+            if isExpanded {
+                AnyView(content())
+            }
+        }
+        .padding()
+        .glassBackgroundEffect()
+        .hoverEffect()
+        .onTapGesture {
+            withAnimation(.spring) {
+                isExpanded.toggle()
             }
         }
     }
