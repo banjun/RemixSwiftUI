@@ -22,11 +22,16 @@ struct RemixSwiftUIApp: SwiftUI.App {
 
     @State private var toggleValue: Bool = false
     @State private var sliderValue: Float = 0.5
+    @State private var rotationValue: (x: Angle, y: Angle) = (.zero, .zero)
 
     var body: some SwiftUI.Scene {
         let sample1: [any View] = [
             Text("SwiftUI in RealityKit →").font(.extraLargeTitle).padding().glassBackgroundEffect(),
-            Model3D(named: "Scene", bundle: realityKitContentBundle),
+            Model3D(named: "Scene", bundle: realityKitContentBundle)
+                .rotation3DEffect(rotationValue.x, axis: .x).rotation3DEffect(rotationValue.y, axis: .y)
+                .gesture(DragGesture().onChanged {
+                    rotationValue = (x: -.degrees($0.location.y - $0.startLocation.y), y: .degrees($0.location.x - $0.startLocation.x))
+                }.onEnded { _ in withAnimation { rotationValue = (.zero, .zero) } }),
             PhysicalRectangle(sideInCM: 20),
             LogicalRectangle(sideInPt: 135),
             Toggle("Toggle", isOn: $toggleValue).fixedSize().padding().glassBackgroundEffect(),
