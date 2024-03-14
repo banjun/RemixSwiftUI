@@ -34,8 +34,8 @@ struct ImmersiveView: View {
 //            eventCollector.collision = .init(shapes: [.generateSphere(radius: 3)])
 //            content.add(eventCollector)
         } update: { content, attachments in
-            let anchor = content.entities.first!.findEntity(named: "EyeHeight")!
-//            let anchor = content.entities.first!.findEntity(named: "DeskHeight")!
+//            let anchor = content.entities.first!.findEntity(named: "EyeHeight")!
+            let anchor = content.entities.first!.findEntity(named: "DeskHeight")!
 
             self.attachments
                 .map { attachments.entity(for: $0.id) }

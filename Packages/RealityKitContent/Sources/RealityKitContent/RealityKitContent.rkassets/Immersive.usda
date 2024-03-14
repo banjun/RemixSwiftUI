@@ -43,186 +43,13 @@ def Xform "Root"
                 }
             }
         }
-
-        def Sphere "Handle" (
-            active = true
-            prepend apiSchemas = ["MaterialBindingAPI"]
-        )
-        {
-            rel material:binding = </Root/EyeHeight/Handle/DefaultMaterial>
-            double radius = 1
-            quatf xformOp:orient = (1, 0, 0, 0)
-            float3 xformOp:scale = (1, 0.001, 1)
-            float3 xformOp:translate = (0, 0, 0)
-            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-            def Material "DefaultMaterial"
-            {
-                reorder nameChildren = ["DefaultSurfaceShader", "PreviewSurface", "Position", "Magnitude", "Multiply_1", "up", "vector_in_plane", "ge0_8", "ge0_9", "Multiply", "DotProduct"]
-                token outputs:mtlx:surface.connect = </Root/EyeHeight/Handle/DefaultMaterial/PreviewSurface.outputs:out>
-                token outputs:realitykit:vertex.connect = </Root/EyeHeight/Handle/DefaultMaterial/GeometryModifier.outputs:out>
-                token outputs:surface.connect = </Root/EyeHeight/Handle/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
-                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (-22.333244, 95.259575)
-                float2 ui:nodegraph:realitykit:subgraphOutputs:size = (181.5, 104.5)
-                int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 364
-
-                def Shader "DefaultSurfaceShader" (
-                    active = false
-                )
-                {
-                    uniform token info:id = "UsdPreviewSurface"
-                    color3f inputs:diffuseColor = (1, 1, 1)
-                    float inputs:roughness = 0.75
-                    token outputs:surface
-                }
-
-                def Shader "PreviewSurface"
-                {
-                    uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
-                    float inputs:clearcoat
-                    float inputs:clearcoatRoughness
-                    color3f inputs:diffuseColor
-                    color3f inputs:emissiveColor
-                    float inputs:ior
-                    float inputs:metallic
-                    float3 inputs:normal
-                    float inputs:occlusion
-                    float inputs:opacity.connect = </Root/EyeHeight/Handle/DefaultMaterial/Multiply.outputs:out>
-                    float inputs:opacityThreshold
-                    float inputs:roughness
-                    token outputs:out
-                    float2 ui:nodegraph:node:pos = (-255, 105)
-                    float2 ui:nodegraph:node:size = (159.5, 323.5)
-                    int ui:nodegraph:node:stackingOrder = 201
-                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["Advanced", "outputs:out"]
-                }
-
-                def Shader "Position"
-                {
-                    uniform token info:id = "ND_position_vector3"
-                    string inputs:space = "object"
-                    float3 outputs:out
-                    float2 ui:nodegraph:node:pos = (-1293.0768, 100.570526)
-                    float2 ui:nodegraph:node:size = (133.5, 41.5)
-                    int ui:nodegraph:node:stackingOrder = 418
-                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out"]
-                }
-
-                def Shader "ge0_8"
-                {
-                    uniform token info:id = "ND_ifgreatereq_float"
-                    float inputs:in1 = 1
-                    float inputs:in2
-                    float inputs:value1 = 0.8
-                    float inputs:value1.connect = </Root/EyeHeight/Handle/DefaultMaterial/Magnitude.outputs:out>
-                    float inputs:value2 = 0.8
-                    float inputs:value2.connect = None
-                    float outputs:out
-                    float2 ui:nodegraph:node:pos = (-569.4297, 79.36719)
-                    float2 ui:nodegraph:node:size = (139, 171.5)
-                    int ui:nodegraph:node:stackingOrder = 358
-                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out", "inputs:in1", "inputs:value1", "inputs:value1", "inputs:value2"]
-                }
-
-                def Shader "ge0_9"
-                {
-                    uniform token info:id = "ND_ifgreatereq_float"
-                    float inputs:in1 = 1
-                    float inputs:in2
-                    float inputs:value1 = 0.9
-                    float inputs:value1.connect = None
-                    float inputs:value2 = 0.6
-                    float inputs:value2.connect = </Root/EyeHeight/Handle/DefaultMaterial/Magnitude.outputs:out>
-                    float outputs:out
-                    float2 ui:nodegraph:node:pos = (-566.6793, 275.9516)
-                    float2 ui:nodegraph:node:size = (139, 171.5)
-                    int ui:nodegraph:node:stackingOrder = 359
-                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out", "inputs:value1", "inputs:value1"]
-                }
-
-                def Shader "Multiply"
-                {
-                    uniform token info:id = "ND_multiply_float"
-                    float inputs:in1.connect = </Root/EyeHeight/Handle/DefaultMaterial/ge0_8.outputs:out>
-                    float inputs:in2.connect = </Root/EyeHeight/Handle/DefaultMaterial/ge0_9.outputs:out>
-                    float outputs:out
-                    float2 ui:nodegraph:node:pos = (-414.07504, 172.22899)
-                    float2 ui:nodegraph:node:size = (60, 36)
-                    int ui:nodegraph:node:stackingOrder = 345
-                }
-
-                def Shader "DotProduct"
-                {
-                    uniform token info:id = "ND_dotproduct_vector3"
-                    float3 inputs:in1.connect = </Root/EyeHeight/Handle/DefaultMaterial/Position.outputs:out>
-                    float3 inputs:in2 = (0, 1, 0)
-                    float3 inputs:in2.connect = </Root/EyeHeight/Handle/DefaultMaterial/up.outputs:out>
-                    float outputs:out
-                    float2 ui:nodegraph:node:pos = (-1112.2683, 196.52702)
-                    float2 ui:nodegraph:node:size = (153.5, 56.5)
-                    int ui:nodegraph:node:stackingOrder = 429
-                }
-
-                def Shader "Magnitude"
-                {
-                    uniform token info:id = "ND_magnitude_vector3"
-                    float3 inputs:in.connect = </Root/EyeHeight/Handle/DefaultMaterial/vector_in_plane.outputs:out>
-                    float outputs:out
-                    float2 ui:nodegraph:node:pos = (-759.9723, 173.44165)
-                    float2 ui:nodegraph:node:size = (152, 41.5)
-                    int ui:nodegraph:node:stackingOrder = 389
-                }
-
-                def Shader "Multiply_1"
-                {
-                    uniform token info:id = "ND_multiply_vector3FA"
-                    float3 inputs:in1.connect = </Root/EyeHeight/Handle/DefaultMaterial/up.outputs:out>
-                    float inputs:in2.connect = </Root/EyeHeight/Handle/DefaultMaterial/DotProduct.outputs:out>
-                    float3 outputs:out
-                    float2 ui:nodegraph:node:pos = (-978.0245, 276.8096)
-                    float2 ui:nodegraph:node:size = (60, 36)
-                    int ui:nodegraph:node:stackingOrder = 431
-                }
-
-                def Shader "up"
-                {
-                    uniform token info:id = "ND_constant_vector3"
-                    float3 inputs:value = (0, 1, 0)
-                    float3 outputs:out
-                    float2 ui:nodegraph:node:pos = (-1293.3132, 271.03943)
-                    float2 ui:nodegraph:node:size = (154.5, 56.5)
-                    int ui:nodegraph:node:stackingOrder = 424
-                }
-
-                def Shader "vector_in_plane"
-                {
-                    uniform token info:id = "ND_subtract_vector3"
-                    float3 inputs:in1.connect = </Root/EyeHeight/Handle/DefaultMaterial/Position.outputs:out>
-                    float3 inputs:in2.connect = </Root/EyeHeight/Handle/DefaultMaterial/Multiply_1.outputs:out>
-                    float3 outputs:out
-                    float2 ui:nodegraph:node:pos = (-897.2922, 170.44186)
-                    float2 ui:nodegraph:node:size = (61.5, 36)
-                    int ui:nodegraph:node:stackingOrder = 433
-                }
-            }
-
-            def RealityKitComponent "InputTarget"
-            {
-                uniform token info:id = "RealityKit.InputTarget"
-            }
-
-            def RealityKitComponent "HierarchicalFade"
-            {
-                uniform token info:id = "RealityKit.HierarchicalFade"
-                float opacity = 0.7008519
-            }
-        }
     }
 
     def Xform "DeskHeight" (
         active = true
     )
     {
+        reorder nameChildren = ["Handle", "Sphere"]
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0, 0.7, 0)
@@ -253,6 +80,180 @@ def Xform "Root"
                     float inputs:roughness = 0.75
                     token outputs:surface
                 }
+            }
+        }
+
+        def Sphere "Handle" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Root/DeskHeight/Handle/DefaultMaterial>
+            double radius = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 0.001, 1)
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                reorder nameChildren = ["DefaultSurfaceShader", "PreviewSurface", "Position", "Magnitude", "Multiply_1", "up", "vector_in_plane", "ge0_8", "ge0_9", "Multiply", "DotProduct"]
+                token outputs:mtlx:surface.connect = </Root/DeskHeight/Handle/DefaultMaterial/PreviewSurface.outputs:out>
+                token outputs:realitykit:vertex.connect = </Root/DeskHeight/Handle/DefaultMaterial/GeometryModifier.outputs:out>
+                token outputs:surface.connect = </Root/DeskHeight/Handle/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (-22.333244, 95.259575)
+                float2 ui:nodegraph:realitykit:subgraphOutputs:size = (181.5, 104.5)
+                int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 364
+
+                def Shader "DefaultSurfaceShader" (
+                    active = false
+                )
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (1, 1, 1)
+                    float inputs:roughness = 0.75
+                    token outputs:surface
+                }
+
+                def Shader "PreviewSurface"
+                {
+                    uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+                    float inputs:clearcoat
+                    float inputs:clearcoatRoughness
+                    color3f inputs:diffuseColor
+                    color3f inputs:emissiveColor
+                    float inputs:ior
+                    float inputs:metallic
+                    float3 inputs:normal
+                    float inputs:occlusion
+                    float inputs:opacity.connect = </Root/DeskHeight/Handle/DefaultMaterial/Multiply.outputs:out>
+                    float inputs:opacityThreshold
+                    float inputs:roughness
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (-255, 105)
+                    float2 ui:nodegraph:node:size = (159.5, 323.5)
+                    int ui:nodegraph:node:stackingOrder = 201
+                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["Advanced", "outputs:out"]
+                }
+
+                def Shader "Position"
+                {
+                    uniform token info:id = "ND_position_vector3"
+                    string inputs:space = "object"
+                    float3 outputs:out
+                    float2 ui:nodegraph:node:pos = (-1293.0768, 100.570526)
+                    float2 ui:nodegraph:node:size = (133.5, 41.5)
+                    int ui:nodegraph:node:stackingOrder = 418
+                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out"]
+                }
+
+                def Shader "ge0_8"
+                {
+                    uniform token info:id = "ND_ifgreatereq_float"
+                    float inputs:in1 = 1
+                    float inputs:in2
+                    float inputs:value1 = 0.8
+                    float inputs:value1.connect = </Root/DeskHeight/Handle/DefaultMaterial/Magnitude.outputs:out>
+                    float inputs:value2 = 0.8
+                    float inputs:value2.connect = None
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-569.4297, 79.36719)
+                    float2 ui:nodegraph:node:size = (139, 171.5)
+                    int ui:nodegraph:node:stackingOrder = 358
+                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out", "inputs:in1", "inputs:value1", "inputs:value1", "inputs:value2"]
+                }
+
+                def Shader "ge0_9"
+                {
+                    uniform token info:id = "ND_ifgreatereq_float"
+                    float inputs:in1 = 1
+                    float inputs:in2
+                    float inputs:value1 = 0.9
+                    float inputs:value1.connect = None
+                    float inputs:value2 = 0.6
+                    float inputs:value2.connect = </Root/DeskHeight/Handle/DefaultMaterial/Magnitude.outputs:out>
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-566.6793, 275.9516)
+                    float2 ui:nodegraph:node:size = (139, 171.5)
+                    int ui:nodegraph:node:stackingOrder = 359
+                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out", "inputs:value1", "inputs:value1"]
+                }
+
+                def Shader "Multiply"
+                {
+                    uniform token info:id = "ND_multiply_float"
+                    float inputs:in1.connect = </Root/DeskHeight/Handle/DefaultMaterial/ge0_8.outputs:out>
+                    float inputs:in2.connect = </Root/DeskHeight/Handle/DefaultMaterial/ge0_9.outputs:out>
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-414.07504, 172.22899)
+                    float2 ui:nodegraph:node:size = (60, 36)
+                    int ui:nodegraph:node:stackingOrder = 345
+                }
+
+                def Shader "DotProduct"
+                {
+                    uniform token info:id = "ND_dotproduct_vector3"
+                    float3 inputs:in1.connect = </Root/DeskHeight/Handle/DefaultMaterial/Position.outputs:out>
+                    float3 inputs:in2 = (0, 1, 0)
+                    float3 inputs:in2.connect = </Root/DeskHeight/Handle/DefaultMaterial/up.outputs:out>
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-1112.2683, 196.52702)
+                    float2 ui:nodegraph:node:size = (153.5, 56.5)
+                    int ui:nodegraph:node:stackingOrder = 429
+                }
+
+                def Shader "Magnitude"
+                {
+                    uniform token info:id = "ND_magnitude_vector3"
+                    float3 inputs:in.connect = </Root/DeskHeight/Handle/DefaultMaterial/vector_in_plane.outputs:out>
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-759.9723, 173.44165)
+                    float2 ui:nodegraph:node:size = (152, 41.5)
+                    int ui:nodegraph:node:stackingOrder = 389
+                }
+
+                def Shader "Multiply_1"
+                {
+                    uniform token info:id = "ND_multiply_vector3FA"
+                    float3 inputs:in1.connect = </Root/DeskHeight/Handle/DefaultMaterial/up.outputs:out>
+                    float inputs:in2.connect = </Root/DeskHeight/Handle/DefaultMaterial/DotProduct.outputs:out>
+                    float3 outputs:out
+                    float2 ui:nodegraph:node:pos = (-978.0245, 276.8096)
+                    float2 ui:nodegraph:node:size = (60, 36)
+                    int ui:nodegraph:node:stackingOrder = 431
+                }
+
+                def Shader "up"
+                {
+                    uniform token info:id = "ND_constant_vector3"
+                    float3 inputs:value = (0, 1, 0)
+                    float3 outputs:out
+                    float2 ui:nodegraph:node:pos = (-1293.3132, 271.03943)
+                    float2 ui:nodegraph:node:size = (154.5, 56.5)
+                    int ui:nodegraph:node:stackingOrder = 424
+                }
+
+                def Shader "vector_in_plane"
+                {
+                    uniform token info:id = "ND_subtract_vector3"
+                    float3 inputs:in1.connect = </Root/DeskHeight/Handle/DefaultMaterial/Position.outputs:out>
+                    float3 inputs:in2.connect = </Root/DeskHeight/Handle/DefaultMaterial/Multiply_1.outputs:out>
+                    float3 outputs:out
+                    float2 ui:nodegraph:node:pos = (-897.2922, 170.44186)
+                    float2 ui:nodegraph:node:size = (61.5, 36)
+                    int ui:nodegraph:node:stackingOrder = 433
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "HierarchicalFade"
+            {
+                uniform token info:id = "RealityKit.HierarchicalFade"
+                float opacity = 0.7008519
             }
         }
     }

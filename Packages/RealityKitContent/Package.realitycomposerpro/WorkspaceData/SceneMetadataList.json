@@ -48,6 +48,24 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
+        "EyeHeight"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
+        "DeskHeight"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "AF09ED6F-1707-48FD-8720-65B998362C09",
+        "Root",
         "DeskHeight",
         "Sphere"
       ],
@@ -59,36 +77,8 @@
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
         "EyeHeight",
-        "Handle"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "EyeHeight",
         "Handle",
         "DefaultMaterial"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "EyeHeight"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "DeskHeight"
       ],
       {
         "isExpanded" : true,
