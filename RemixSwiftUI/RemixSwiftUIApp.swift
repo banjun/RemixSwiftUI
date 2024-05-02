@@ -23,6 +23,11 @@ struct RemixSwiftUIApp: SwiftUI.App {
     @State private var toggleValue: Bool = false
     @State private var sliderValue: Float = 0.5
     @State private var rotationValue: (x: Angle, y: Angle) = (.zero, .zero)
+    let multiColumnText = MultiColumnText(text: .init(string: "Apple Vision Pro offers an infinite spatial canvas to explore, experiment, and play, giving you the freedom to completely rethink your experience in 3D. People can interact with your app while staying connected to their surroundings, or immerse themselves completely in a world of your creation. And your experiences can be fluid: start in a window, bring in 3D content, transition to a fully immersive scene, and come right back.", attributes: [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 30)]), columns: 4)
+    @State private var height0: Bool = false
+    @State private var height1: Bool = false
+    @State private var height2: Bool = false
+    @State private var height3: Bool = false
 
     var body: some SwiftUI.Scene {
         let sample1: [any View] = [
@@ -40,11 +45,13 @@ struct RemixSwiftUIApp: SwiftUI.App {
             Popup { Text("Open Toggle").font(.extraLargeTitle) } content: {
                 Toggle("Toggle", isOn: $toggleValue).fixedSize().padding()
             },
+            multiColumnText.textViews[0].frame(width: 300, height: height0 ? 400 : 300).onTapGesture {withAnimation{height0.toggle()}}.glassBackgroundEffect(),
+            multiColumnText.textViews[1].frame(width: 300, height: height1 ? 400 : 300).onTapGesture {withAnimation{height1.toggle()}}.glassBackgroundEffect(),
+            multiColumnText.textViews[2].frame(width: 300, height: height2 ? 400 : 300).onTapGesture {withAnimation{height2.toggle()}}.glassBackgroundEffect(),
+            multiColumnText.textViews[3].frame(width: 300, height: height3 ? 400 : 300).onTapGesture {withAnimation{height3.toggle()}}.glassBackgroundEffect(),
             Text("Text 1").font(.extraLargeTitle).padding().glassBackgroundEffect(),
             Text("Text 2").font(.extraLargeTitle).padding().glassBackgroundEffect(),
             Text("Text 3").font(.extraLargeTitle).padding().glassBackgroundEffect(),
-            Text("Text 4").font(.extraLargeTitle).padding().glassBackgroundEffect(),
-            Text("Text 5").font(.extraLargeTitle).padding().glassBackgroundEffect(),
             DismissImmersiveSpaceButton(showImmersiveSpace: $showImmersiveSpace).font(.extraLargeTitle),
         ]
 

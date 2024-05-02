@@ -16,6 +16,7 @@
 		63D5ECD92B67B15E002E7F2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63D5ECD82B67B15E002E7F2C /* Assets.xcassets */; };
 		63D5ECDC2B67B15E002E7F2C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63D5ECDB2B67B15E002E7F2C /* Preview Assets.xcassets */; };
 		63D5ECE42B67C456002E7F2C /* WindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D5ECE32B67C456002E7F2C /* WindowView.swift */; };
+		63DA959E2BE381BE00EF13AA /* MultiColumnText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA959D2BE381BE00EF13AA /* MultiColumnText.swift */; };
 		63DB86802B739C5200E2461D /* BottomAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DB867F2B739C5200E2461D /* BottomAlignedLayout.swift */; };
 		63EABFF42B68E87600A8C5F3 /* DismissImmersiveSpaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EABFF32B68E87600A8C5F3 /* DismissImmersiveSpaceButton.swift */; };
 		63EABFF62B68E8D600A8C5F3 /* RealityViewAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EABFF52B68E8D600A8C5F3 /* RealityViewAttachment.swift */; };
@@ -37,6 +38,7 @@
 		63D5ECDB2B67B15E002E7F2C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		63D5ECDD2B67B15E002E7F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63D5ECE32B67C456002E7F2C /* WindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowView.swift; sourceTree = "<group>"; };
+		63DA959D2BE381BE00EF13AA /* MultiColumnText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiColumnText.swift; sourceTree = "<group>"; };
 		63DB867F2B739C5200E2461D /* BottomAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAlignedLayout.swift; sourceTree = "<group>"; };
 		63EABFF32B68E87600A8C5F3 /* DismissImmersiveSpaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissImmersiveSpaceButton.swift; sourceTree = "<group>"; };
 		63EABFF52B68E8D600A8C5F3 /* RealityViewAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealityViewAttachment.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				63EABFFD2B68FE4200A8C5F3 /* PhysicalMetricsContainer.swift */,
 				6377DBE42B6911EC00FFAECC /* Popup.swift */,
 				63DB867F2B739C5200E2461D /* BottomAlignedLayout.swift */,
+				63DA959D2BE381BE00EF13AA /* MultiColumnText.swift */,
 				63D5ECD82B67B15E002E7F2C /* Assets.xcassets */,
 				63D5ECDD2B67B15E002E7F2C /* Info.plist */,
 				63D5ECDA2B67B15E002E7F2C /* Preview Content */,
@@ -196,6 +199,7 @@
 				63EABFFA2B68E90300A8C5F3 /* LogicalRectangle.swift in Sources */,
 				63D5ECD52B67B152002E7F2C /* ControlView.swift in Sources */,
 				63EABFFC2B68E93B00A8C5F3 /* NumberFormatter+.swift in Sources */,
+				63DA959E2BE381BE00EF13AA /* MultiColumnText.swift in Sources */,
 				63D5ECD32B67B152002E7F2C /* RemixSwiftUIApp.swift in Sources */,
 				63EABFF42B68E87600A8C5F3 /* DismissImmersiveSpaceButton.swift in Sources */,
 				63D5ECE42B67C456002E7F2C /* WindowView.swift in Sources */,
